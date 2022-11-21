@@ -1,0 +1,104 @@
+#include<cstdio>
+#include<cstdlib>
+#include<cstring>
+#include<vector>
+#include<queue>
+using namespace std;
+
+const int maxn = 256 + 10;
+
+// 节点类型
+struct Node
+{
+    bool have_value;
+    int v;  // 节点值
+    int left, right;
+    Node() : have_value(false), left(NULL), right(NULL){}  // 构造函数
+};
+
+const int root = 1;
+void newtree() { left[root] = right[root] = 0; have_value = false; cnt = root; }
+int newnode() { int u = ++cnt; left[u] = right[u] = 0; have_value[root] = false; return u; }
+
+bool failed;
+void addnode(int v, char *s)
+{
+    int n = strlen(s);
+    int u = root;  // 从根节点往下走
+    for (int i = 0; i < n; i++)
+    {
+        if (s[i] == 'L')
+        {
+            if (left[u] == NULL) left[u] = newnode();  // 节点不存在，建立新节点
+            u = left[u];                               // 往右走
+        }
+        else if (s[i] == 'R')
+        {
+            if (right[u] == NULL) right[u] = newnode();
+            u = right[u];
+        }
+    }
+    if (u->have_value) failed = true;
+    u->v = v;
+    u->have_value = true;  // 别忘了做标记
+}
+
+void remove_tree(int u)
+{
+    if (u == NULL) return;  // 提前判断比较稳妥
+    remove_tree(left[u]);   // 递归释放左子树空间
+    remove_tree(right[u]);  // 递归释放右子树空间
+    delete u;  // 调用u的析构函数并释放u节点本身的内存
+}
+
+char s[maxn];
+bool read_input()
+{
+    failed = false;
+    remove_tree(root);  // 释放上一棵二叉树的内存
+    root = newnode();
+    for (;;)
+    {
+        if (scanf("%s", s) != 1) return false;
+        if (!strcmp(s, "()")) break;
+        int v;
+        sscanf(&s[1], "%d", &v);
+        addnode(v, strchr(s, ',') + 1);
+    }
+    return true;
+}
+
+bool bfs(vector<int> &ans)  // 宽度优先遍历(Breadth-First Search, BFS)
+{
+    queue<Node*> q;
+    ans.clear();
+    q.push(root);  // 初始时只有一个根节点
+    while (!q.empty())
+    {
+        int u = q.front(); q.pop();
+        if(!u->have_value) return false;  // 有节点没有被赋值过，表明输入有误
+        ans.push_back(u->v);  // 增加到输出序列尾部
+        if (left[u] != NULL) q.push(left[u]);  // 把左子节点（如果有）放进队列
+        if (right[u] != NULL) q.push(right[u]);  // 把右子节点（如果有）放进队列
+    }
+    return true;  // 输入正确
+}
+
+int main() {
+    vector<int> ans;
+    while(read_input())
+    {
+        if(!bfs(ans)) failed = 1;
+        if(failed) printf("not complete\n");
+        else
+        {
+            for(int i = 0; i < ans.size(); i++)
+            {
+                if(i != 0) printf(" ");
+                printf("%d", ans[i]);
+            }
+            printf("\n");
+        }
+    }
+    return 0;
+}
