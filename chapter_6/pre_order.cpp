@@ -37,8 +37,8 @@ int build(int L1, int R1, int L2, int R2)
 }
 void preorder(int u)  // Deep First Search
 {
-    cout << post_order[u] << endl;
-    if (!lch[u] && !rch[u])  // 叶子
+    cout << post_order[u] << " ";
+    if (lch[u] || rch[u])  // 叶子
     {
         if (lch[u]) preorder(lch[u]);
         if (rch[u]) preorder(rch[u]);
