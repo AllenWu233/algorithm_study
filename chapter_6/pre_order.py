@@ -2,9 +2,7 @@ pre_order, in_order, post_order = [], '', ''
 def read_list():
     global pre_order, in_order, post_order
     in_order = input()
-    if in_order == '': return False
     post_order = input()
-    if post_order == '': return False
     pre_order = []
     in_order = list(map(int, in_order.split()))
     post_order = list(map(int, post_order.split()))
@@ -33,10 +31,13 @@ def build_pre(in_order, post_order):
         build_pre(in_right, post_right)
 
 
-
 while 1:
-    if read_list() == False: break
+    try:
+        read_list()
+    except:
+        break
     build_pre(in_order, post_order)
     print("PreOrder: ", end='')
     for i in pre_order:
         print(i, end=' ')
+    print("\n")

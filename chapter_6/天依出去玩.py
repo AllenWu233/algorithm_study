@@ -3,9 +3,7 @@ cnt = 0
 def read_list():
     global pre_order, in_order, post_order
     in_order = input()
-    if in_order == '': return False
     post_order = input()
-    if post_order == '': return False
     pre_order = []
     in_order = list(map(int, in_order.split()))
     post_order = list(map(int, post_order.split()))
@@ -32,8 +30,8 @@ def build_pre(in_order, post_order, k):
 while 1:
     try:
         n, k = map(int, input().split())
+        read_list()
     except:
         break
-    if read_list() == False: break
     build_pre(in_order, post_order, k)
     cnt = 0
