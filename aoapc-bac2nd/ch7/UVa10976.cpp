@@ -10,7 +10,7 @@ int main() {
     vector<int> X, Y;
     for(int y = k+1; y <= k*2; y++) {
       // 1/k = 1/x + 1/y => x = ky/(y-k)
-      if(k*y%(y-k) == 0)
+      if(k*y%(y-k) == 0)  // if x为整数
         { X.push_back(k*y/(y-k)); Y.push_back(y); }
     }
     printf("%d\n", X.size());

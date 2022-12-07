@@ -11,11 +11,11 @@ void print_permutation(int n, int* P, int* A, int cur) {
   if(cur == n) {
     for(int i = 0; i < n; i++) printf("%d ", A[i]);
     printf("\n");
-  } else for(int i = 0; i < n; i++) if(!i || P[i] != P[i-1]) {
+  } else for(int i = 0; i < n; i++) if(!i || P[i] != P[i-1]) { // 防重复
     int c1 = 0, c2 = 0;
     for(int j = 0; j < cur; j++) if(A[j] == P[i]) c1++;
     for(int j = 0; j < n; j++) if(P[i] == P[j]) c2++;
-    if(c1 < c2) {
+    if(c1 < c2) {  // 防遗漏
       A[cur] = P[i];
       print_permutation(n, P, A, cur+1);
     }

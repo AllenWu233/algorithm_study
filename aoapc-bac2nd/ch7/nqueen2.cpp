@@ -23,7 +23,7 @@ void search(int cur) {
 }
 
 int main() {
-  scanf("%d", &n);
+  // scanf("%d", &n);
   memset(vis, 0, sizeof(vis));
   search(0);
   printf("%d\n", tot);

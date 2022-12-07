@@ -8,7 +8,7 @@ int C[50], tot = 0, n = 8, nc = 0;
 
 void search(int cur) {
   int i, j;
-  nc++;
+  nc++;  // 递归次数
   if(cur == n) {
     tot++;
   } else for(i = 0; i < n; i++) {
@@ -24,7 +24,7 @@ void search(int cur) {
 }
 
 int main() {
-  scanf("%d", &n);
+  // scanf("%d", &n);
   search(0);
   printf("%d\n", tot);
   printf("%d\n", nc);

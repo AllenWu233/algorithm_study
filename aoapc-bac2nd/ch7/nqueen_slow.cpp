@@ -4,7 +4,7 @@
 using namespace std;
 
 int C[50], tot = 0, n = 8, nc = 0;
-
+// 先生成棋面，再判断
 void search(int cur) {
   int i, j;
   nc++;
