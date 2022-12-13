@@ -30,7 +30,7 @@ void addnode(int v, char *s)
         if (s[i] == 'L')
         {
             if (u->left == NULL) u->left = newnode();  // 节点不存在，建立新节点
-            u = u->left;                               // 往右走
+            u = u->left;                               // 往左走
         }
         else if (s[i] == 'R')
         {

@@ -2,9 +2,10 @@
 // 普通回溯法
 #include <iostream>
 #include <cstring>
+#include <ctime>
 using namespace std;
 
-int C[50], tot = 0, n = 8, nc = 0;
+int C[50], tot = 0, n = 15, nc = 0;
 // C[x]表示第x行皇后的列编号
 void search(int cur)
 {
@@ -30,11 +31,13 @@ void search(int cur)
 }
 int main()
 {
-    while (cin >> n)
+    // while (cin >> n)
     {
+        double last_time = (double)clock()/CLOCKS_PER_SEC;
         search(0);
         cout << "解的个数: " << tot << endl;
         cout << "递归次数: " << nc << endl;
+        cout << "耗时：" << (double)clock()/CLOCKS_PER_SEC - last_time << "s\n";
         nc = 0; tot = 0; memset(C, 0, sizeof(C));
     }
     return 0;

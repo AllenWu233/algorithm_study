@@ -16,10 +16,10 @@ int main()
         int ok = 1;
         while (B <= n)
         {
-            if (A == target[B]) { A++; B++; }
-            else if (!s.empty() && s.top() == target[B]) { s.pop(); B++; }
-            else if (A <= n) s.push(A++);
-            else { ok = 0; break; }
+            if (A == target[B]) { A++; B++; }  // 入栈顺序与出栈一致
+            else if (!s.empty() && s.top() == target[B]) { s.pop(); B++; }  // 入栈
+            else if (A <= n) s.push(A++);  // 出栈
+            else { ok = 0; break; }  // 不合法
         }
         printf("%s\n", ok ? "Yes" : "No");
     }

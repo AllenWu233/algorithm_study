@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdio>
 #include <cstring>
+#include <ctime>
 using namespace std;
 
 int C[50], vis[3][50], tot = 0, n = 8, nc = 0;
@@ -23,20 +24,23 @@ void search(int cur)
         if (!vis[0][i] && !vis[1][cur+i] && !vis[2][cur-i+n])
         {
             C[cur] = i;  // 如果不用打印解，整个C数组都可以省略
-            vis[0][i] = vis[1][cur+i] = vis[2][cur-i+n] = 1;
+            vis[0][i] = vis[1][cur+i] = vis[2][cur-i+n] = 1;  // 访问标记
             search(cur+1);
-            vis[0][i] = vis[1][cur+i] = vis[2][cur-i+n] = 0;
+            vis[0][i] = vis[1][cur+i] = vis[2][cur-i+n] = 0;  // 及时改回来！
         }
     }
 }
 
-int main() {
+int main()
+{
     while (cin >> n)
     {
+        double last_time = (double)clock()/CLOCKS_PER_SEC;
         memset(vis, 0, sizeof(vis));
         search(0);
         cout << "解的个数: " << tot << endl;
         cout << "递归次数: " << nc << endl;
+        cout << "耗时：" << (double)clock()/CLOCKS_PER_SEC - last_time << "s\n";
         tot = 0; nc = 0;
     }
     return 0;

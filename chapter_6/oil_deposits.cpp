@@ -1,4 +1,4 @@
-// #define LOCAL
+#define LOCAL
 #include <iostream>
 #include <cstring>
 #include <cstdio>
@@ -27,7 +27,7 @@ int main()
     while(scanf("%d%d", &m, &n) == 2 && m && n)
     {
         for (int i = 0; i < m; i++) cin >> pic[i];
-            memset(idx, 0, sizeof(idx));
+        memset(idx, 0, sizeof(idx));
         int cnt = 0;
         for (int i = 0; i < m; i++)
             for (int j = 0; j < n; j++)
