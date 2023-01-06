@@ -31,7 +31,7 @@ void search(int cur)
 }
 int main()
 {
-    // while (cin >> n)
+    while (cin >> n)
     {
         double last_time = (double)clock()/CLOCKS_PER_SEC;
         search(0);

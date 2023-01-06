@@ -5,7 +5,8 @@
 #include <ctime>
 using namespace std;
 
-int C[50], tot = 0, n = 8, nc = 0;
+int C[50], tot = 0, n = 8;
+long long nc = 0;
 // 先生成棋面，再判断
 void search(int cur)
 {
@@ -16,14 +17,14 @@ void search(int cur)
         for(i = 0; i < n; i++)
             for(j = i+1; j < n; j++)
                 if(C[i] == C[j] || i-C[i] == j-C[j] || i+C[i] == j+C[j]) return;
-            tot++;
-        }
-        else for(i = 0; i < n; i++)
-        {
-            C[cur] = i;
-            search(cur+1);
-        }
+        tot++;
     }
+    else for(i = 0; i < n; i++)
+    {
+        C[cur] = i;
+        search(cur+1);
+    }
+}
 
 int main()
 {

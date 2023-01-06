@@ -1,29 +1,46 @@
 #include <iostream>
 #include <cstdio>
+#include <cstring>
 #include <stack>
 using namespace std;
 
 stack<char> s;
+char str[140];
 
-int main()
-{
+int main() {
     bool failed;
-    int n; char c;
+    int n;
     cin >> n;
-    while (n--)
-    {
-        getchar();
+    getchar();
+    while (n--) {
         failed = false;
-        while (c = getchar() != '\n')
-        {
-            if (c == '(' || c == '[') s.push(c);
-            if (c == ')' && s.top() != '(') { failed = true; break; }
-            else s.pop();
-            if (c == '[' && s.top() != ']') { failed = true; break; }
-            else s.pop();
-            if (failed) cout << "No";
-            else cout << "Yes" << endl;
-            while (!s.empty()) s.pop();
+        fgets(str, sizeof(str), stdin);  // 可以读取空串
+        for (int i = 0; str[i] != '\0'; i++) {
+            if (str[i] == '(' || str[i] == '[') {
+                s.push(str[i]);
+                continue;
+            }
+            if (str[i] == ')') {
+                if (s.empty() || s.top() != '(') {
+                    failed = true;
+                    break;
+                } else s.pop();
+            } 
+            if (str[i] == ']') {
+                if (s.empty() || s.top() != '[') {
+                    failed = true;
+                    break;
+                } else s.pop();
+            } 
         }
+        while (!s.empty()) {
+            if (s.top() == '(' || s.top() == '[') {
+                failed = true;
+            }
+            s.pop();
+        }
+        if (failed) cout << "No" << endl;
+        else cout << "Yes" << endl;
+        memset(str, '\0', sizeof(str));
     }
 }

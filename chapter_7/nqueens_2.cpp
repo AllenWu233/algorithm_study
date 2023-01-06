@@ -9,7 +9,7 @@ int C[50], vis[3][50], tot = 0, n = 8, nc = 0;
 // 利用二维数组vis[2][]直接判断当前尝试的皇后所在的列和两个对角线是否已有其他皇后
 void search(int cur)
 {
-    int i, j;
+    int i;
     nc++;
     if (cur == n) tot++;
     // if(cur == n)

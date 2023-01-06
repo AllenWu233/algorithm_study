@@ -3,8 +3,9 @@ def gcd(a, b):
         return a
     else:
         return gcd(b, a%b)
-try:
-    a, b = map(int, input().split())
-    print(gcd(a, b))
-except:
-    print("Error.")
+while 1:
+    try:
+        a, b = map(int, input("输入两个数：").split())
+        print(f"{a}和{b}的最大公约数为：{gcd(a, b)}\n")
+    except:
+        print("Error.")
