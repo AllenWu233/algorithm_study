@@ -1,4 +1,3 @@
-#define LOCAL
 #include <iostream>
 #include <cstring>
 #include <cstdio>
