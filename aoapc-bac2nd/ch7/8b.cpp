@@ -12,7 +12,7 @@ State st[MAXSTATE], goal;
 int dist[MAXSTATE];
 
 const int MAXHASHSIZE = 1000003;
-int head[MAXHASHSIZE], next[MAXSTATE];
+int head[MAXHASHSIZE], next_[MAXSTATE];
 void init_lookup_table() { memset(head, 0, sizeof(head)); }
 int hash(State& s) {
   int v = 0;
@@ -24,9 +24,9 @@ int try_to_insert(int s) {
   int u = head[h];
   while(u) {
     if(memcmp(st[u], st[s], sizeof(st[s])) == 0) return 0;
-    u = next[u];
+    u = next_[u];
   }
-  next[s] = head[h];
+  next_[s] = head[h];
   head[h] = s;
   return 1;
 }

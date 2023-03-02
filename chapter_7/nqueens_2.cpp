@@ -12,13 +12,13 @@ void search(int cur)
     int i;
     nc++;
     if (cur == n) tot++;
-    // if(cur == n)
-    // {
-    //     printf("解%d: ", tot);
-    //     for (int i = 0; i < n; i++)
-    //         printf("(%d,%d) ", i, C[i]);
-    //     printf("\n");
-    // }
+    if(cur == n)
+    {
+        printf("解%d: ", tot);
+        for (int i = 0; i < n; i++)
+            printf("(%d,%d) ", i, C[i]);
+        printf("\n");
+    }
     else for(i = 0; i < n; i++)
     {
         if (!vis[0][i] && !vis[1][cur+i] && !vis[2][cur-i+n])

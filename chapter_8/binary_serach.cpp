@@ -19,5 +19,6 @@ int main()
     sort(arr, arr+6);
     cout << binary_serach(arr, 0, 6, 687) << endl;
     for (int i = 0; i < 7; i++) cout << arr[i] << " ";
+    cout << endl;
     return 0;
 }

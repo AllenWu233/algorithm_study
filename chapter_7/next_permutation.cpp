@@ -9,17 +9,14 @@ int main()
     int n, p[10];
     while(scanf("%d", &n))
     {
-        int cnt = 1;
+        int cnt = 0;
         for(int i = 0; i < n; i++) scanf("%d", &p[i]);
         sort(p, p+n); // 排序，得到p的最小排列
-        for(int i = 0; i < n; i++) printf("%d ", p[i]); // 输出初始排列
-        printf("\n");
-        while(next_permutation(p, p+n)) // 求下一个排列
-        {
+        do {
             for(int i = 0; i < n; i++) printf("%d ", p[i]); // 输出排列p
             cnt++;
             printf("\n");
-        }
+        } while(next_permutation(p, p+n)); // 求下一个排列
         printf("共有%d个排列\n", cnt);
     }
     return 0;
