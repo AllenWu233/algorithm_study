@@ -1,3 +1,4 @@
+// 有向图的欧拉道路
 #define IOS ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
 #include <bits/stdc++.h>
 typedef long long LL;
@@ -30,20 +31,17 @@ bool check_connected() {
 }
 
 bool check_degree() {
-    int cnt = 0, in_ = 0, out_ = 0;
+    int in_ = 0, out_ = 0;
     for (int i = 1; i <= 26; i++) {
-        if (vis[i] && (in[i] != out[i])) {
-            cnt++;
-            if (cnt > 2) return false;
+        if (vis[i] && in[i] != out[i]) {
             if (out[i] - in[i] == 1) out_++;
-            if (in[i] - out[i] == 1) in_++;
+            else if (in[i] - out[i] == 1) in_++;
+            else return false;
         }
     }
-    if (cnt == 2) {
-        if ((out_ == 2 && in_ == 2) || (out_ == 0 && in_ == 0))
-            return false;
-    }
-    return true;
+    if ((out_ == 1 && in_ == 1) || (out_ == 0 && in_ == 0))
+        return true;
+    return false;
 }
 
 void solve() {
@@ -58,7 +56,7 @@ void solve() {
         int u = s[0] - 'a' + 1, v = s[s.length()-1] - 'a' + 1;
         out[u]++, in[v]++;
         vis[u] = vis[v] = true;
-        if (fa[v] != u) fa[u] = v;
+        if (find(u) != find(v)) fa[u] = v;  // 防止无限递归
     }
     // cout << check_connected() << endl;
     // cout << check_degree() << endl;
@@ -69,7 +67,7 @@ void solve() {
 int main() {
 #ifdef LOCAL
     freopen("uva10129.in", "r", stdin);
-    freopen("uva10129_.out", "w", stdout);
+//     freopen("uva10129_.out", "w", stdout);
 #endif
     IOS
     int t;

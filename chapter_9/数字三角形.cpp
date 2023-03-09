@@ -25,8 +25,8 @@ int solve(int i, int j) {
 
 int main() {
 #ifdef LOCAL
-    freopen("test.in", "r", stdin);
-    freopen("test.out", "w", stdout);
+    freopen("number_triangle.in", "r", stdin);
+    freopen("number_triangle_.out", "w", stdout);
 #endif
     IOS
     while (read_input()) {
