@@ -1,3 +1,6 @@
+import time
+
+
 def print_solve():
     global tot, n, C
     print(f"解：{tot}")
@@ -11,8 +14,8 @@ def search(cur):
     nc += 1
     if cur == n:
         tot += 1
-        if cur == n:
-            print_solve()
+        # if cur == n:
+        #     print_solve()
     else:
         for i in range(n):
             if vis[0][i] == 0 and vis[1][cur+i] == 0 and vis[2][cur-i+n] == 0:
@@ -27,6 +30,8 @@ def search(cur):
 
 
 while 1:
+    start = time.time()
+
     C = [0]*30
     vis = [[0]*30 for _ in range(3)]
     tot = 0
@@ -39,3 +44,6 @@ while 1:
     search(0)
     print(f"解的个数：{tot}")
     print(f"递归次数：{nc}")
+
+    end = time.time()
+    print('程序执行时间: ', end - start)

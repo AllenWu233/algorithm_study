@@ -46,7 +46,7 @@ void print_ans(int i) {
 int main() {
 #ifdef LOCAL
     freopen("nested_rectangle.in", "r", stdin);
-    freopen("nested_rectangle_.out", "w", stdout);
+    // freopen("nested_rectangle_.out", "w", stdout);
 #endif
     int t;
     cin >> t;
@@ -56,12 +56,8 @@ int main() {
         read_input();
         for (int i = 1; i <= n; i++) dp(i);
         int Max = -1, maxi = 1;
-        for (int i = 1; i <= n; i++) { 
-            if (d[i] > Max) {
-                Max = d[i];
-                maxi = i;
-            }
-        }
+        for (int i = 1; i <= n; i++)
+            if (d[i] > Max) { Max = d[i]; maxi = i; }
         print_ans(maxi);
         cout << "\n\n";
     }

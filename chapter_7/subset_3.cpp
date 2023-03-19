@@ -13,7 +13,8 @@ void print_subset(int n, int s)
 int main()
 {
     int n;
-    scanf("%d", &n);
+    // scanf("%d", &n);
+    n = 5;
     for (int i = 0; i < (1 << n); i++)  // 枚举各子集所对应的编码 0, 1, 2, ..., 2^n-1
         print_subset(n, i);
     return 0;

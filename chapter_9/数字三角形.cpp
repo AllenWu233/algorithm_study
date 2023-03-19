@@ -17,7 +17,7 @@ bool read_input() {
         return true;
     } return false;
 }
-
+// 因为题目说每个数都是非负整数，所以d[]初始化为-1，d[i] >= 0 表示未计算
 int solve(int i, int j) {
     if (d[i][j] >= 0) return d[i][j];
     return d[i][j] = a[i][j] + (i == n ? 0 : max(solve(i+1, j), solve(i+1, j+1)));
