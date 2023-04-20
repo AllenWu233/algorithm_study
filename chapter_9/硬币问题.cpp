@@ -2,10 +2,10 @@
 // 有 n 种硬币，面值分别为 V1, V2, ... ,Vn，每种都有无限多。
 // 给定非负整数 S，可以选用多少个硬币，使得面值之和恰好为 S？输出硬币数目的最小值和最大值
 #define IOS ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-#define INF 0x3f3f3f3f
 #include <iostream>
 #include <algorithm>
 #include <cstring>
+const int INF = 0x3f3f3f3f;
 using namespace std;
 
 const int maxn = 100 + 5;
@@ -35,12 +35,22 @@ int dp_min(int S) {
 }
 
 void print_ans(int *d, int S) {
+    // if (d[S] == INF || d[S] == -INF) {
+    //     cout << "No solution.\n";
+    //     return;
+    // }
     for (int i = 1; i <= n; i++)
         if (S >= V[i] && d[S] == d[S-V[i]] + 1) {
-            cout << i << ' ';
+            cout << V[i] << ' ';
             print_ans(d, S-V[i]);
             break;
         }
+}
+
+void init() {
+    cin >> n;
+    for (int i = 1; i <= n; i++) cin >> V[i];
+    cin >> S;
 }
 
 int main() {
@@ -51,20 +61,15 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        memset(dmin, 0, sizeof(dmin));
-        memset(dmax, 0, sizeof(dmax));
-        cin >> n;
-        for (int i = 1; i <= n; i++) cin >> V[i];
-        cin >> S;
-        int Min = INF, Max = -INF;
+        init();
         // memset(vis, 0, sizeof(vis));
-        // for (int i = 1; i <= n; i++) Min = min(dp_min(i), Min);
+        // dp_min(S);
         memset(vis, 0, sizeof(vis));
-        for (int i = 1; i <= n; i++) Max = max(dp_max(i), Max);
-        // print_ans(dmin, Min);
-        // print_ans(dmax, Max);
-
-        for (int i = 1; i <= n; i++) cout << dmin[i] << ' ' << dmax[i] << endl;
+        dp_max(S);
+        // print_ans(dmin, S);
+        // cout << endl;
+        print_ans(dmax, S);
+        cout << endl;
     }
     return 0;
 }

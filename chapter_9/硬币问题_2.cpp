@@ -2,77 +2,75 @@
 // 有 n 种硬币，面值分别为 V1, V2, ... ,Vn，每种都有无限多。
 // 给定非负整数 S，可以选用多少个硬币，使得面值之和恰好为 S？输出硬币数目的最小值和最大值
 #define IOS ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-#define INF 0x3f3f3f3f
 #include <iostream>
 #include <algorithm>
 #include <cstring>
+const int INF = 0x3f3f3f3f;
 using namespace std;
 
 const int maxn = 100 + 5;
 const int maxs = 10000 + 10;
-int n, S, V[maxn], minv[maxs], maxv[maxs], min_coins[maxs], max_coins[maxs];
+int n, S, V[maxn], minv[maxs], maxv[maxs];
+int min_coin[maxs], max_coin[maxs];  // 空间换时间
 
+
+void init() {
+    memset(minv, INF, sizeof(minv));
+    memset(maxv, -INF, sizeof(maxv));
+    memset(min_coin, 0, sizeof(min_coin));
+    memset(max_coin, 0, sizeof(max_coin));
+    minv[0] = maxv[0] = 0;
+    cin >> n;
+    for (int i = 1; i <= n; i++) cin >> V[i];
+    cin >> S;
+}
 // 递推
 void solve() {
-    minv[0] = maxv[0] = 0;
-    for (int i = 1; i <= S; i++) {
-        minv[i] = INF, maxv[i] = -INF;
-    }
     for (int i = 1; i <= S; i++)
         for (int j = 1; j <= n; j++)
             if (i >= V[j]) {
                 if (minv[i] > minv[i-V[j]] + 1) {
                     minv[i] = minv[i-V[j]] + 1;
-                    min_coins[i] = j;
+                    min_coin[i] = j;
                 }
                 if (maxv[i] < maxv[i-V[j]] + 1) {
                     maxv[i] = maxv[i-V[j]] + 1;
-                    max_coins[i] = j;
+                    max_coin[i] = j;
                 }
             }
 }
 
-// void print_ans(int *d, int S) {
-//     for (int i = 1; i <= n; i++)
-//         if (S >= V[i] && d[S] == d[S-V[i]] + 1) {
-//             cout << i << ' ';
-//             print_ans(d, S-V[i]);                        
-//             break;
-//         }
-// }
-
-void print_ans(int *d, int S) {
-    while (S) {
-        cout << d[S] << ' ';
+void print_ans(int *v, int *d, int S) {
+    cout << v[S] << endl;
+    while (S && d[S]) {
+        cout << V[d[S]] << ' ';
         S -= V[d[S]];
     }
+    cout << endl;
 }
 
 int main() {
 #ifdef LOCAL
     freopen("coins.in", "r", stdin);
-    freopen("coins_2.out", "w", stdout);
+    // freopen("coins_2.out", "w", stdout);
 #endif
+    IOS
     int t;
     cin >> t;
+    int kase = 0;
     while (t--) {
-        memset(minv, 0, sizeof(minv));
-        memset(maxv, 0, sizeof(maxv));
-        memset(min_coins, 0, sizeof(min_coins));
-        memset(max_coins, 0, sizeof(max_coins));
-
-        cin >> n;
-        for (int i = 1; i <= n; i++) cin >> V[i];
-        cin >> S;
+        init();
         solve();
+        cout << "Case " << ++kase << ":\n";
+        print_ans(minv, min_coin, S);
+        print_ans(maxv, max_coin, S);
 
-        cout << minv[S] << endl;
-        print_ans(min_coins, S);
-        cout << endl;
-        
-        cout << maxv[S] << endl;
-        print_ans(max_coins, S);
-        cout << endl << endl;
+        // for (int i = 0; i <= S; i++) cout << min_coin[i] << ' ';
+        // cout << endl;
+        // for (int i = 0; i <= S; i++) cout << max_coin[i] << ' ';
+        // cout << endl;
+
+        // cout << endl;
     }
     return 0;
 }
